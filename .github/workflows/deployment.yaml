@@ -1,0 +1,31 @@
+name: artifact-demo
+on:
+    push:
+        branches:
+            - main
+            - dev
+            - release*
+        paths:
+            - 'src/*'
+    pull_request:
+        branches:
+            - main
+            - dev
+            - release*
+    workflow_dispatch:
+    schedule:
+        - cron: '0 9 * * *' # runs at 9 am
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: get code
+              uses: actions/checkout@v3
+            - name: install deps
+              run: npm ci
+            - name: lint code
+              run: npm run lint
+            - name: test code
+              run: npm run test
+            
+
