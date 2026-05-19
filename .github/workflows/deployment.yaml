@@ -5,16 +5,16 @@ on:
             - main
             - dev
             - release*
-        paths:
-            - 'src/*'
-    pull_request:
-        branches:
-            - main
-            - dev
-            - release*
-    workflow_dispatch:
-    schedule:
-        - cron: '0 9 * * *' # runs at 9 am
+#        paths:
+#            - 'src/*'
+#    pull_request:
+#        branches:
+#            - main
+#            - dev
+#            - release*
+#    workflow_dispatch:
+#    schedule:
+#        - cron: '0 9 * * *' # runs at 9 am
 jobs:
     test:
         runs-on: ubuntu-latest
@@ -27,5 +27,4 @@ jobs:
               run: npm run lint
             - name: test code
               run: npm run test
-            
 
