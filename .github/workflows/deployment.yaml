@@ -28,6 +28,7 @@ jobs:
             - name: test code
               run: npm run test
     build:
+        needs: test
         runs-on: ubuntu-latest
         steps:
             - name: get code
@@ -39,5 +40,18 @@ jobs:
             - name: upload build arifacts
               uses: actions/upload-artifact@v4
               with:
-                name: dest-files
+                name: dist-files
                 path: dist  
+    deploy:
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+            - name: get-build-artifact
+              uses: actions/download-artifact@v4
+              with:
+                name: dist-files
+            - name: list files
+              run: ls -ll
+            - name: deploy
+              run: echo "deploying"
+              
