@@ -27,4 +27,17 @@ jobs:
               run: npm run lint
             - name: test code
               run: npm run test
-
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: get code
+              uses: actions/checkout@v3
+            - name: install deps
+              run: npm ci
+            - name: build
+              run: npm run build
+            - name: upload build arifacts
+              uses: actions/upload-artifact@v3
+              with:
+                name: dest-files
+                path: dist  
